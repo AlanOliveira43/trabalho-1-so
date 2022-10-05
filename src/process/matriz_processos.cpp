@@ -62,9 +62,11 @@ int main(int argc, char* argv[]){
 
     int tam = number_of_loop(size, p);
 
+    int tam = number_of_loop(size, p);
+
     pid_t process[tam];
 
-
+    int first_position=0;
     int last_position=0;
     int k=0;
     int j=0;
@@ -73,23 +75,27 @@ int main(int argc, char* argv[]){
     std::get<1>(pos) = j;
     for(int i=0;i<tam;i++){
         process[i] = fork();
+        begin = p*i;
+        process[i] = fork;
         if(process[i] == 0){
             std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-            pos = operation.multiply_process(matrix, matrix_a, matrix_b, std::get<0>(pos), std::get<1>(pos), p, last_position);
-//            std::cout << "i: " << std::get<0>(pos) << " j: " << std::get<1>(pos) << std::endl;
-                                                                            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-            total_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
-            std::string file_name = "process "+std::to_string(i+1);
-
-            std::cout << std::endl;
-            //std::tuple<int,int,std::vector<int> > list(lines,columns,std::get<2>(pos));
-            //matrix_file.printDataInFIle(list, file_name, total_time, "sequential");
-            exit(0);
-        }
-        last_position += p;
-
-        process[i] =  wait(NULL);
+          for(int k{begin}; k<end; k++){
+                x = k/tam;
+                j = k%tam;
+                for(size_t l{0}; l<tam; l++){
+                    res[x][j] += matrizA[x][l] * matrizB[l][j];
+                }
+                chrono::steady_clock::time_point end = chrono::steady_clock::now();
+            file<<"Tempo: "<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+            
+            file.close();
+            cout <<i<< " Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+        
+            break;
+            }
+            
     }
+//
 //
     wait(NULL);
 //
