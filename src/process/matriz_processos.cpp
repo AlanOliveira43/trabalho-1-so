@@ -117,7 +117,7 @@ int main(int argc, char* argv[]){
 ////        std::cout << matrix[i] << "-";
 ////    }
 //
-////    std::cout << "Processo executado em " << total_time << "[ms] e a média de tempo foi de "<< media_time << "[ms].\n";
+////    std::cout << "Processo executado e " << total_time << "[ms] e a média de tempo foi de "<< media_time << "[ms].\n";
 
     shmdt(matrix);
     shmctl(shmid,IPC_RMID, NULL);
